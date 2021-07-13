@@ -2,14 +2,9 @@ import React from 'react';
 import useStyles from './styles';
 import { Typography, Card, CardActions, CardContent, Button } from '@material-ui/core';
 import AnimatedModal from '../Modal/Modal';
-import { datasource } from '../data';
 
 const SimpleCard = (props) => {
   const classes = useStyles();
-
-  const handleOpen = () => {
-
-  }
 
   const handleDelete = (id) => {
     console.log(id);
@@ -22,7 +17,7 @@ const SimpleCard = (props) => {
 
   return (
     <div>
-      <Card className={classes.root} >
+      <Card className={classes.root} variant="outlined" >
         <CardContent>
 
           <Typography >
@@ -44,19 +39,19 @@ const SimpleCard = (props) => {
 
         </CardContent>
         <CardActions>
-          <Button size="small">View</Button>
-          {/* <Button size="small" onClick={handleOpen} >
+          <Button size="small" variant="outlined" color="inherit">Update</Button>
+          <Button size="small"  >
             <AnimatedModal 
-              id={id}
-              name={name}
-              email={email}
-              desc={desc}
+              id={props.id}
+              name={props.name}
+              email={props.email}
+              desc={props.desc}
             />
-          </Button> */}
-          <Button size="small" onClick={() => handleDelete(props.id)} >Delete</Button>
+          </Button>
+          <Button size="small" onClick={() => handleDelete(props.id)} variant="outlined" color="secondary" >Delete</Button>
         </CardActions>
       </Card>
-      
+
     </div>
 
   );

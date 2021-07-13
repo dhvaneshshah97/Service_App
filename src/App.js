@@ -5,7 +5,6 @@ import { datasource } from './data';
 import { useEffect } from 'react';
 
 const App = () => {
-  const [update, setUpdate] = useState(false);
   const [data, setData] = useState(datasource);
   const local = () => {
     console.log(data);
@@ -19,21 +18,23 @@ const App = () => {
   
   useEffect(() => {
     local();
-  }, [update])
+  }, [])
   
   return (
-    <div>
+    <div style={{margin: '25px'}}>
+      <h3 style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+      Service Application
+      </h3>
       <Grid container spacing={3}>
         {
           data.map((o, i) => <Grid item xs={4}>
             <SimpleCard 
+            key={i}
             id={o.ID}
             name={o.Name}
             email={o.Email}
             desc={o.Description}
-            update={update}
             refresh={refresh}
-
           />
           </Grid>)
         }

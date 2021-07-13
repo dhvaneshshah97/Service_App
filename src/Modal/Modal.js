@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        margin: '50px'
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 const AnimatedModal = ({ id, name, email, desc }) => {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -36,8 +37,8 @@ const AnimatedModal = ({ id, name, email, desc }) => {
     return (
         <div>
 
-            <Button variant="contained" color="secondary" onClick={handleOpen}>
-                Update
+            <Button variant="outlined" color="primary" onClick={handleOpen}>
+                View
             </Button>
 
             <Modal
@@ -54,33 +55,10 @@ const AnimatedModal = ({ id, name, email, desc }) => {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <form>
-                            <div>
-                                <FormControl>
-                                    <InputLabel>ID</InputLabel>
-                                    <Input value={id} ></Input>
-                                </FormControl>
-                            </div>
-                            <div>
-                                <FormControl>
-                                    <InputLabel>Name</InputLabel>
-                                    <Input defaultValue={name} />
-                                </FormControl>
-                            </div>
-                            <div>
-                                <FormControl>
-                                    <InputLabel>Email</InputLabel>
-                                    <Input defaultValue={email} />
-                                </FormControl>
-                            </div>
-                            <div>
-                                <FormControl>
-                                    <InputLabel>Description</InputLabel>
-                                    <Input defaultValue={desc} />
-                                </FormControl>
-                            </div>
-
-                        </form>
+                        <p>ID: {id}</p>
+                        <p>Name: {name} </p>
+                        <p>Email: {email}</p>
+                        <p>Description: {desc}</p>
                     </div>
                 </Fade>
             </Modal>
