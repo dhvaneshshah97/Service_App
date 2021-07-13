@@ -1,14 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import SimpleCard from './Card/Card';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <div>
-        Hello Dhvanesh!
-      </div>
+    <div>
+      <SimpleCard />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
