@@ -1,4 +1,4 @@
-export const data = [
+export const datasource = [
     {
         ID: '101',
         Name: 'Service-1',

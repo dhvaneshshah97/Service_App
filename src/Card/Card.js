@@ -2,41 +2,58 @@ import React from 'react';
 import useStyles from './styles';
 import { Typography, Card, CardActions, CardContent, Button } from '@material-ui/core';
 import AnimatedModal from '../Modal/Modal';
+import { datasource } from '../data';
 
-
-const SimpleCard = ({ id, name, email, desc }) => {
+const SimpleCard = (props) => {
   const classes = useStyles();
 
   const handleOpen = () => {
 
   }
 
+  const handleDelete = (id) => {
+    console.log(id);
+    let serviceData = JSON.parse(localStorage.getItem('data'));
+    serviceData = serviceData.filter((o) => o.ID !== id);
+    console.log(serviceData);
+    localStorage.setItem('data', JSON.stringify(serviceData));
+    props.refresh(serviceData)
+  }
+
   return (
     <div>
-      <Card className={classes.root}>
+      <Card className={classes.root} >
         <CardContent>
 
           <Typography >
-            ID: {id}
+            ID: {props.id}
           </Typography>
 
           <Typography>
-            Name: {name}
+            Name: {props.name}
           </Typography>
 
           <Typography noWrap>
-            Description: {desc}
+            Description: {props.desc}
           </Typography>
 
           <Typography>
-            Email: {email}
+            Email: {props.email}
             <br />
           </Typography>
 
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={handleOpen} ><AnimatedModal /></Button>
-          <Button size="small">Delete</Button>
+          <Button size="small">View</Button>
+          {/* <Button size="small" onClick={handleOpen} >
+            <AnimatedModal 
+              id={id}
+              name={name}
+              email={email}
+              desc={desc}
+            />
+          </Button> */}
+          <Button size="small" onClick={() => handleDelete(props.id)} >Delete</Button>
         </CardActions>
       </Card>
       

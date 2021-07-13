@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { data } from '../data';
+import { FormControl, FormLabel, Input, InputLabel, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function AnimatedModal() {
+const AnimatedModal = ({ id, name, email, desc }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -52,13 +54,38 @@ export default function AnimatedModal() {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <h2>Animated React Modal</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan odio enim.
-                        </p>
+                        <form>
+                            <div>
+                                <FormControl>
+                                    <InputLabel>ID</InputLabel>
+                                    <Input value={id} ></Input>
+                                </FormControl>
+                            </div>
+                            <div>
+                                <FormControl>
+                                    <InputLabel>Name</InputLabel>
+                                    <Input defaultValue={name} />
+                                </FormControl>
+                            </div>
+                            <div>
+                                <FormControl>
+                                    <InputLabel>Email</InputLabel>
+                                    <Input defaultValue={email} />
+                                </FormControl>
+                            </div>
+                            <div>
+                                <FormControl>
+                                    <InputLabel>Description</InputLabel>
+                                    <Input defaultValue={desc} />
+                                </FormControl>
+                            </div>
+
+                        </form>
                     </div>
                 </Fade>
             </Modal>
         </div>
     );
 }
+
+export default AnimatedModal;
