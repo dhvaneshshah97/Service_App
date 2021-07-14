@@ -3,14 +3,22 @@ import useStyles from './styles';
 import { Typography, Card, CardActions, CardContent, Button } from '@material-ui/core';
 import ViewDialog from '../ViewDialog/ViewDialog';
 
-const SimpleCard = (props) => {
+interface Props {
+  id: number,
+  name: string,
+  email: string,
+  desc: string,
+  makeComponentUpdate: Function,
+}
+
+const SimpleCard = ({id, name, email, desc, makeComponentUpdate}: Props): JSX.Element => {
   const classes = useStyles();
 
-  const handleDelete = (id) => {
-    let serviceData = JSON.parse(localStorage.getItem('data'));
-    serviceData = serviceData.filter((o) => o.ID !== id);
+  const handleDelete = (id: number) => {
+    let serviceData = JSON.parse(localStorage.getItem('data') || '');
+    serviceData = serviceData.filter((o: { ID: number; }) => o.ID !== id);
     localStorage.setItem('data', JSON.stringify(serviceData));
-    props.makeComponentUpdate();
+    makeComponentUpdate();
   }
 
   return (
@@ -19,19 +27,19 @@ const SimpleCard = (props) => {
 
         <CardContent>
           <Typography >
-            ID: {props.id}
+            ID: {id}
           </Typography>
 
           <Typography>
-            Name: {props.name}
+            Name: {name}
           </Typography>
 
           <Typography noWrap>
-            Description: {props.desc}
+            Description: {desc}
           </Typography>
 
           <Typography>
-            Email: {props.email}
+            Email: {email}
             <br />
           </Typography>
         </CardContent>
@@ -46,14 +54,14 @@ const SimpleCard = (props) => {
             /> */}
 
             <ViewDialog
-              id={props.id}
-              name={props.name}
-              email={props.email}
-              desc={props.desc}
+              id={id}
+              name={name}
+              email={email}
+              desc={desc}
               action="view"
             />
 
-          <Button size="small" onClick={() => handleDelete(props.id)} variant="outlined" color="secondary" >Delete</Button>
+          <Button size="small" onClick={() => handleDelete(id)} variant="outlined" color="secondary" >Delete</Button>
         </CardActions>
 
       </Card>

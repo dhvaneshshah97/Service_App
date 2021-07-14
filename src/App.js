@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SimpleCard from './Card/Card';
+import SimpleCard from './Card/Card.tsx';
 import { Button, Grid } from '@material-ui/core';
 import { datasource } from './data';
 
