@@ -7,12 +7,10 @@ const SimpleCard = (props) => {
   const classes = useStyles();
 
   const handleDelete = (id) => {
-    console.log(id);
     let serviceData = JSON.parse(localStorage.getItem('data'));
     serviceData = serviceData.filter((o) => o.ID !== id);
-    console.log(serviceData);
     localStorage.setItem('data', JSON.stringify(serviceData));
-    props.refresh(serviceData)
+    props.makeComponentUpdate();
   }
 
   return (

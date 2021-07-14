@@ -1,44 +1,58 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import SimpleCard from './Card/Card';
-import { Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { datasource } from './data';
 import { useEffect } from 'react';
 
 const App = () => {
-  const [data, setData] = useState(datasource);
+  const [update, setUpdate] = useState(false);
   const local = () => {
-    console.log(data);
-    localStorage.setItem('data', JSON.stringify(data));
+    if (localStorage.getItem('data') === null) {
+      localStorage.setItem('data', JSON.stringify(datasource))
+    }
   }
 
-  const refresh = (updatedData) => {
-    setData(updatedData)
-    localStorage.setItem('data', JSON.stringify(updatedData));
+  const handleReset = () => {
+    localStorage.setItem('data', JSON.stringify(datasource))
+    setUpdate(!update);
   }
-  
+
+  const makeComponentUpdate = () => {
+    setUpdate(!update);
+  }
+
   useEffect(() => {
     local();
-  }, [])
-  
+  }, [update])
+
   return (
-    <div style={{margin: '25px'}}>
-      <h3 style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
-      Service Application
+    <div style={{ margin: '25px' }}>
+      
+      <h3 style={{ textAlign: 'center' }}>
+        Service Application
       </h3>
+
       <Grid container spacing={3}>
         {
-          data.map((o, i) => <Grid item xs={4}>
-            <SimpleCard 
-            key={i}
-            id={o.ID}
-            name={o.Name}
-            email={o.Email}
-            desc={o.Description}
-            refresh={refresh}
-          />
+          JSON.parse(localStorage.getItem('data')).map((o, i) => <Grid item xs={4}>
+            <SimpleCard
+              key={i}
+              id={o.ID}
+              name={o.Name}
+              email={o.Email}
+              desc={o.Description}
+              makeComponentUpdate={makeComponentUpdate}
+            />
           </Grid>)
         }
       </Grid>
+
+      <div style={{ textAlign: 'center', margin:'15px 0 5px 0'}}>
+        <Button variant="contained" color="primary" onClick={handleReset} >
+          Reset
+        </Button>
+      </div>
+
     </div>
   )
 }
