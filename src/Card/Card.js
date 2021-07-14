@@ -16,7 +16,7 @@ const SimpleCard = (props) => {
   return (
     <div>
       <Card className={classes.root} variant="outlined" >
-        
+
         <CardContent>
           <Typography >
             ID: {props.id}
@@ -35,17 +35,24 @@ const SimpleCard = (props) => {
             <br />
           </Typography>
         </CardContent>
-        
+
         <CardActions>
-          <Button size="small" variant="outlined" color="inherit">Update</Button>
-          <Button size="small"  >
-            <ViewDialog 
+            {/* <ViewDialog
               id={props.id}
               name={props.name}
               email={props.email}
               desc={props.desc}
+              action="update"
+            /> */}
+
+            <ViewDialog
+              id={props.id}
+              name={props.name}
+              email={props.email}
+              desc={props.desc}
+              action="view"
             />
-          </Button>
+
           <Button size="small" onClick={() => handleDelete(props.id)} variant="outlined" color="secondary" >Delete</Button>
         </CardActions>
 

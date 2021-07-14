@@ -7,6 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
+import { TextField } from '@material-ui/core';
 
 function PaperComponent(props) {
     return (
@@ -16,8 +17,11 @@ function PaperComponent(props) {
     );
 }
 
-const ViewDialog = ({id, name, email, desc}) => {
+const ViewDialog = ({ id, name, email, desc, action }) => {
     const [open, setOpen] = useState(false);
+    const [values, setValues] = useState({
+        name, email, desc
+    })
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -27,10 +31,15 @@ const ViewDialog = ({id, name, email, desc}) => {
         setOpen(false);
     };
 
+    const handleChange = (event) => {
+        const [id, value] = event.target;
+        setValues({...values, [id]: value})
+    }
+
     return (
-        <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                View
+        <>
+            <Button variant="outlined" color={action === 'update' ? 'inherit' : 'primary'} onClick={handleClickOpen} size="small">
+                {action === 'update' ? 'update' : 'view'}
             </Button>
             <Dialog
                 open={open}
@@ -42,18 +51,59 @@ const ViewDialog = ({id, name, email, desc}) => {
                     {name}
                 </DialogTitle>
                 <DialogContent>
+
                     <DialogContentText>
                         ID: {id}
                     </DialogContentText>
-                    <DialogContentText>
-                        Name: {name}
-                    </DialogContentText>
-                    <DialogContentText>
-                        Email: {email}
-                    </DialogContentText>
-                    <DialogContentText>
-                        Description: {desc}
-                    </DialogContentText>
+
+                    {
+                        action === 'view' ? <DialogContentText>
+                            Name: {name}
+                        </DialogContentText> : <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Name"
+                            fullWidth
+                            defaultValue={name}
+                            value={values.name}
+                            onChange={handleChange}
+                        />
+                    }
+
+                    {
+                        action === 'view' ? <DialogContentText>
+                            Email: {email}
+                        </DialogContentText> :
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="email"
+                                label="Email"
+                                fullWidth
+                                defaultValue={email}
+                                value={values.email}
+                                onChange={handleChange}
+                            />
+                    }
+
+                    {
+                        action === 'view' ? <DialogContentText>
+                            Description: {desc}
+                        </DialogContentText> :
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="desc"
+                                label="Description"
+                                fullWidth
+                                defaultValue={desc}
+                                value={values.desc}
+                                onChange={handleChange}
+                            />
+                    }
+
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
@@ -61,7 +111,7 @@ const ViewDialog = ({id, name, email, desc}) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </>
     );
 }
 
