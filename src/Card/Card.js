@@ -16,8 +16,8 @@ const SimpleCard = (props) => {
   return (
     <div>
       <Card className={classes.root} variant="outlined" >
+        
         <CardContent>
-
           <Typography >
             ID: {props.id}
           </Typography>
@@ -34,8 +34,8 @@ const SimpleCard = (props) => {
             Email: {props.email}
             <br />
           </Typography>
-
         </CardContent>
+        
         <CardActions>
           <Button size="small" variant="outlined" color="inherit">Update</Button>
           <Button size="small"  >
@@ -48,10 +48,9 @@ const SimpleCard = (props) => {
           </Button>
           <Button size="small" onClick={() => handleDelete(props.id)} variant="outlined" color="secondary" >Delete</Button>
         </CardActions>
+
       </Card>
-
     </div>
-
   );
 }
 

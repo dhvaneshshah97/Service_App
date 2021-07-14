@@ -1,22 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SimpleCard from './Card/Card';
 import { Button, Grid } from '@material-ui/core';
 import { datasource } from './data';
-import { useEffect } from 'react';
 
 const App = () => {
   const [update, setUpdate] = useState(false);
+
+  // initialize local-storage
   const local = () => {
     if (localStorage.getItem('data') === null) {
       localStorage.setItem('data', JSON.stringify(datasource))
     }
   }
 
+  // Reset the local-storage
   const handleReset = () => {
     localStorage.setItem('data', JSON.stringify(datasource))
     setUpdate(!update);
   }
 
+  // Refresh the component(main page) after delete operation
   const makeComponentUpdate = () => {
     setUpdate(!update);
   }
@@ -34,7 +37,8 @@ const App = () => {
 
       <Grid container spacing={3}>
         {
-          JSON.parse(localStorage.getItem('data')).map((o, i) => <Grid item xs={4}>
+          JSON.parse(localStorage.getItem('data')).map((o, i) => 
+          <Grid item xs={4}>
             <SimpleCard
               key={i}
               id={o.ID}
@@ -54,7 +58,7 @@ const App = () => {
       </div>
 
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
