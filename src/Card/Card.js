@@ -1,7 +1,7 @@
 import React from 'react';
 import useStyles from './styles';
 import { Typography, Card, CardActions, CardContent, Button } from '@material-ui/core';
-import AnimatedModal from '../Modal/Modal';
+import ViewDialog from '../ViewDialog/ViewDialog';
 
 const SimpleCard = (props) => {
   const classes = useStyles();
@@ -39,7 +39,7 @@ const SimpleCard = (props) => {
         <CardActions>
           <Button size="small" variant="outlined" color="inherit">Update</Button>
           <Button size="small"  >
-            <AnimatedModal 
+            <ViewDialog 
               id={props.id}
               name={props.name}
               email={props.email}
