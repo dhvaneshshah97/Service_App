@@ -45,13 +45,14 @@ const SimpleCard = ({id, name, email, desc, makeComponentUpdate}: Props): JSX.El
         </CardContent>
 
         <CardActions>
-            {/* <ViewDialog
-              id={props.id}
-              name={props.name}
-              email={props.email}
-              desc={props.desc}
+            <ViewDialog
+              id={id}
+              name={name}
+              email={email}
+              desc={desc}
               action="update"
-            /> */}
+              makeComponentUpdate={makeComponentUpdate}
+            />
 
             <ViewDialog
               id={id}
@@ -59,6 +60,7 @@ const SimpleCard = ({id, name, email, desc, makeComponentUpdate}: Props): JSX.El
               email={email}
               desc={desc}
               action="view"
+              makeComponentUpdate={makeComponentUpdate}
             />
 
           <Button size="small" onClick={() => handleDelete(id)} variant="outlined" color="secondary" >Delete</Button>

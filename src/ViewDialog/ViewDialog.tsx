@@ -5,11 +5,20 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Paper from '@material-ui/core/Paper';
+import Paper, { PaperProps } from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
 import { TextField } from '@material-ui/core';
 
-function PaperComponent(props) {
+interface Props {
+    id: number,
+    name: string,
+    email: string,
+    desc: string,
+    action: string,
+    makeComponentUpdate: Function,
+}
+
+function PaperComponent(props: JSX.IntrinsicAttributes & PaperProps) {
     return (
         <Draggable handle="#draggable-dialog-title" cancel={'[class*="MuiDialogContent-root"]'}>
             <Paper {...props} />
@@ -17,10 +26,10 @@ function PaperComponent(props) {
     );
 }
 
-const ViewDialog = ({ id, name, email, desc, action }) => {
+const ViewDialog = ({ id, name, email, desc, action, makeComponentUpdate }: Props): JSX.Element => {
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
-        name, email, desc
+        id, name, email, desc
     })
 
     const handleClickOpen = () => {
@@ -31,9 +40,21 @@ const ViewDialog = ({ id, name, email, desc, action }) => {
         setOpen(false);
     };
 
-    const handleChange = (event) => {
-        const [id, value] = event.target;
-        setValues({...values, [id]: value})
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setValues({ ...values, [name]: value });
+    }
+
+    const handleUpdate = () => {
+        let serviceData = JSON.parse(localStorage.getItem('data') || '');
+        let idx = serviceData.findIndex((o:{ID:number}) => o.ID === id);
+        serviceData[idx].Name = values.name;
+        serviceData[idx].Email = values.email;
+        serviceData[idx].Description = values.desc;
+        localStorage.setItem('data', JSON.stringify(serviceData));
+        makeComponentUpdate();
+        setOpen(false);
     }
 
     return (
@@ -62,10 +83,9 @@ const ViewDialog = ({ id, name, email, desc, action }) => {
                         </DialogContentText> : <TextField
                             autoFocus
                             margin="dense"
-                            id="name"
+                            name="name"
                             label="Name"
                             fullWidth
-                            defaultValue={name}
                             value={values.name}
                             onChange={handleChange}
                         />
@@ -78,10 +98,9 @@ const ViewDialog = ({ id, name, email, desc, action }) => {
                             <TextField
                                 autoFocus
                                 margin="dense"
-                                id="email"
+                                name="email"
                                 label="Email"
                                 fullWidth
-                                defaultValue={email}
                                 value={values.email}
                                 onChange={handleChange}
                             />
@@ -94,10 +113,9 @@ const ViewDialog = ({ id, name, email, desc, action }) => {
                             <TextField
                                 autoFocus
                                 margin="dense"
-                                id="desc"
+                                name="desc"
                                 label="Description"
                                 fullWidth
-                                defaultValue={desc}
                                 value={values.desc}
                                 onChange={handleChange}
                             />
@@ -106,9 +124,17 @@ const ViewDialog = ({ id, name, email, desc, action }) => {
 
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary">
+                    {action === 'view' && <Button onClick={handleClose} color="primary">
                         Done
                     </Button>
+                    }
+                    {
+                        action === 'update' && <Button onClick={handleUpdate} color="primary">
+                            Update
+                        </Button>
+                    }
+
+
                 </DialogActions>
             </Dialog>
         </>
