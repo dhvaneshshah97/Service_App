@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SimpleCard from './Card/Card.tsx';
+import SimpleCard from './Card/Card';
 import { Button, Grid } from '@material-ui/core';
 import { datasource } from './data';
 
@@ -12,7 +12,7 @@ const App = () => {
     if (localStorage.getItem('data') === null) {
       localStorage.setItem('data', JSON.stringify(datasource))
     }
-    setData(JSON.parse(localStorage.getItem('data')));
+    setData(JSON.parse(localStorage.getItem('data') || ''));
   }
 
   // Reset the local-storage
@@ -39,7 +39,7 @@ const App = () => {
 
       <Grid container spacing={3}>
         {
-          data.map((o, i) =>
+          data.map((o:{ID:number, Name:string,Email:string, Description:string}, i) =>
             <Grid item xs={4}>
               <SimpleCard
                 key={i}

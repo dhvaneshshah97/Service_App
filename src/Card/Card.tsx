@@ -1,5 +1,5 @@
 import React from 'react';
-import useStyles from './styles';
+import useStyles from './styles.js';
 import { Typography, Card, CardActions, CardContent, Button } from '@material-ui/core';
 import ViewDialog from '../ViewDialog/ViewDialog';
 

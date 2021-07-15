@@ -118,6 +118,9 @@ const ViewDialog = ({ id, name, email, desc, action, makeComponentUpdate }: Prop
                                 fullWidth
                                 value={values.desc}
                                 onChange={handleChange}
+                                multiline
+                                rows={2}
+                                maxRows={Infinity}
                             />
                     }
 
