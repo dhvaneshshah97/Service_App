@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders app snapshot 1`] = `
+<div
+  style={
+    Object {
+      "margin": "25px",
+    }
+  }
+>
+  <h3
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    Service Application
+  </h3>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+  />
+  <div
+    style={
+      Object {
+        "margin": "15px 0 5px 0",
+        "textAlign": "center",
+      }
+    }
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        Reset
+      </span>
+    </button>
+  </div>
+</div>
+`;
