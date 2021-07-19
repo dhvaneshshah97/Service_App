@@ -40,9 +40,9 @@ const App = () => {
       <Grid container spacing={3}>
         {
           data.map((o:{ID:number, Name:string,Email:string, Description:string}, i) =>
-            <Grid item xs={4}>
+            <Grid item xs={4} key={i}>
               <SimpleCard
-                key={i}
+                
                 id={o.ID}
                 name={o.Name}
                 email={o.Email}

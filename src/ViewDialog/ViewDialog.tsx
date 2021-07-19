@@ -128,12 +128,12 @@ const ViewDialog = ({ id, name, email, desc, action, makeComponentUpdate }: Prop
                 </DialogContent>
                 <DialogActions>
                     {action === 'view' && <Button onClick={handleClose} color="primary">
-                        Done
+                        Done Viewing
                     </Button>
                     }
                     {
                         action === 'update' && <Button onClick={handleUpdate} color="primary">
-                            Update
+                            Update Modal
                         </Button>
                     }
 
